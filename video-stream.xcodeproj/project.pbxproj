@@ -255,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				7AFD3B5B1CE4C53C00815D7D /* AppDelegate.swift */,
+				F3E5268A1CE4CCFC002C19E9 /* DeviceSettings.swift */,
 				7AFD3B5D1CE4C53C00815D7D /* ViewController.swift */,
 				7AFD3C291CE4CC9700815D7D /* Settings */,
 				7AFD3B5F1CE4C53C00815D7D /* Main.storyboard */,
@@ -663,6 +664,7 @@
 				7AFD3B5C1CE4C53C00815D7D /* AppDelegate.swift in Sources */,
 				7AFD3C1B1CE4C87A00815D7D /* FFUtilities.m in Sources */,
 				7AFD3C161CE4C87A00815D7D /* FFInputStream.m in Sources */,
+				F3E5268B1CE4CCFC002C19E9 /* DeviceSettings.swift in Sources */,
 				7AFD3C181CE4C87A00815D7D /* FFOutputFile.m in Sources */,
 				7AFD3C141CE4C87A00815D7D /* FFFile.m in Sources */,
 			);
@@ -899,6 +901,7 @@
 				7AFD3B821CE4C53D00815D7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AFD3B831CE4C53D00815D7D /* Build configuration list for PBXNativeTarget "video-streamTests" */ = {
 			isa = XCConfigurationList;
@@ -907,6 +910,7 @@
 				7AFD3B851CE4C53D00815D7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AFD3B861CE4C53D00815D7D /* Build configuration list for PBXNativeTarget "video-streamUITests" */ = {
 			isa = XCConfigurationList;
@@ -915,6 +919,7 @@
 				7AFD3B881CE4C53D00815D7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
