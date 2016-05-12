@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         let previewAudioVideo = preview?.createPreview(self.view.frame.size, session: sessionAudioVideo!)
         
         mainView.layer.addSublayer(previewAudioVideo!)
+        
+        session?.startSession()
     }
 
     override func didReceiveMemoryWarning() {

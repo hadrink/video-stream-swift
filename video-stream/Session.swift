@@ -88,8 +88,7 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
     
     func startSession() {
-        let session = createSession()
-        session.startRunning()
+        session?.startRunning()
     }
     
 }
