@@ -10,16 +10,6 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-    
-    var avAssetWriter: AVAssetWriter!
-    var avAssetWriterInput: AVAssetWriterInput!
-    var captureSession: AVCaptureSession!
-    var input: AVCaptureDeviceInput!
-    var captureDevice: AVCaptureDevice!
-    var output: AVCaptureVideoDataOutput!
-    var currentIndex: Int!
-    var maxTimer: NSTimer!
-    var ffmpegWrapper: FFmpegWrapper!
 
     override func viewDidLoad() {
         super.viewDidLoad()

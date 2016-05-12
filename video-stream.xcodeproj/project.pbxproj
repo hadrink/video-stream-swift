@@ -34,6 +34,7 @@
 		7AFD3C1D1CE4C87A00815D7D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD3C0B1CE4C87A00815D7D /* README.md */; };
 		7AFD3C201CE4C8C200815D7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFD3C1F1CE4C8C200815D7D /* AVFoundation.framework */; };
 		7AFD3C221CE4C8CC00815D7D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFD3C211CE4C8CC00815D7D /* CoreMedia.framework */; };
+		F3E5268B1CE4CCFC002C19E9 /* DeviceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E5268A1CE4CCFC002C19E9 /* DeviceSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,7 @@
 		7AFD3C1F1CE4C8C200815D7D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7AFD3C211CE4C8CC00815D7D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		7AFD3C281CE4C9CE00815D7D /* bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
+		F3E5268A1CE4CCFC002C19E9 /* DeviceSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				7AFD3B5B1CE4C53C00815D7D /* AppDelegate.swift */,
+				F3E5268A1CE4CCFC002C19E9 /* DeviceSettings.swift */,
 				7AFD3B5D1CE4C53C00815D7D /* ViewController.swift */,
 				7AFD3B5F1CE4C53C00815D7D /* Main.storyboard */,
 				7AFD3B621CE4C53C00815D7D /* Assets.xcassets */,
@@ -647,6 +650,7 @@
 				7AFD3B5C1CE4C53C00815D7D /* AppDelegate.swift in Sources */,
 				7AFD3C1B1CE4C87A00815D7D /* FFUtilities.m in Sources */,
 				7AFD3C161CE4C87A00815D7D /* FFInputStream.m in Sources */,
+				F3E5268B1CE4CCFC002C19E9 /* DeviceSettings.swift in Sources */,
 				7AFD3C181CE4C87A00815D7D /* FFOutputFile.m in Sources */,
 				7AFD3C141CE4C87A00815D7D /* FFFile.m in Sources */,
 			);
@@ -883,6 +887,7 @@
 				7AFD3B821CE4C53D00815D7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AFD3B831CE4C53D00815D7D /* Build configuration list for PBXNativeTarget "video-streamTests" */ = {
 			isa = XCConfigurationList;
@@ -891,6 +896,7 @@
 				7AFD3B851CE4C53D00815D7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AFD3B861CE4C53D00815D7D /* Build configuration list for PBXNativeTarget "video-streamUITests" */ = {
 			isa = XCConfigurationList;
@@ -899,6 +905,7 @@
 				7AFD3B881CE4C53D00815D7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
