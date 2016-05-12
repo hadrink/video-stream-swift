@@ -16,8 +16,45 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zik-M9-E25">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Zik-M9-E25" secondAttribute="trailing" id="Vlu-WP-HOW"/>
+                            <constraint firstItem="Zik-M9-E25" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="izR-Rl-jPH"/>
+                            <constraint firstItem="Zik-M9-E25" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="p1G-FU-d6g"/>
+                            <constraint firstItem="Zik-M9-E25" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="yKx-YR-wsf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Zik-M9-E25"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Vlu-WP-HOW"/>
+                                <exclude reference="izR-Rl-jPH"/>
+                                <exclude reference="p1G-FU-d6g"/>
+                                <exclude reference="yKx-YR-wsf"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Zik-M9-E25"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Vlu-WP-HOW"/>
+                                <include reference="izR-Rl-jPH"/>
+                                <include reference="p1G-FU-d6g"/>
+                                <include reference="yKx-YR-wsf"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="mainView" destination="Zik-M9-E25" id="MqF-WP-SXj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
