@@ -13,17 +13,24 @@ class DeviceSettings {
     
     //MARK: Variables
     
-    var captureDevice: AVCaptureDevice!
+    var audioDevice: AVCaptureDevice?
+    var videoDevice: AVCaptureDevice?
     
     
     //MARK: Functions
 
-    func getDevice() -> AVCaptureDevice {
-        return captureDevice
+    func getAudioDevice() -> AVCaptureDevice {
+        audioDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        return audioDevice!
+    }
+    
+    func getVideoDevice() -> AVCaptureDevice {
+        videoDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        return videoDevice!
     }
 
-    func configureDevice() {
-        if let device = captureDevice {
+    func configureDevice() -> Void {
+        if let device = videoDevice {
             do {
                 try device.lockForConfiguration()
             } catch _ {
