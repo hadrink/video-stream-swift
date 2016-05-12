@@ -34,6 +34,8 @@
 		7AFD3C1D1CE4C87A00815D7D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD3C0B1CE4C87A00815D7D /* README.md */; };
 		7AFD3C201CE4C8C200815D7D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFD3C1F1CE4C8C200815D7D /* AVFoundation.framework */; };
 		7AFD3C221CE4C8CC00815D7D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFD3C211CE4C8CC00815D7D /* CoreMedia.framework */; };
+		7AFD3C2B1CE4CCD800815D7D /* createSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD3C2A1CE4CCD800815D7D /* createSession.swift */; };
+		7AFD3C2D1CE4D32900815D7D /* createPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD3C2C1CE4D32900815D7D /* createPreview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +191,8 @@
 		7AFD3C1F1CE4C8C200815D7D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7AFD3C211CE4C8CC00815D7D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		7AFD3C281CE4C9CE00815D7D /* bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
+		7AFD3C2A1CE4CCD800815D7D /* createSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createSession.swift; sourceTree = "<group>"; };
+		7AFD3C2C1CE4D32900815D7D /* createPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +256,7 @@
 			children = (
 				7AFD3B5B1CE4C53C00815D7D /* AppDelegate.swift */,
 				7AFD3B5D1CE4C53C00815D7D /* ViewController.swift */,
+				7AFD3C291CE4CC9700815D7D /* Settings */,
 				7AFD3B5F1CE4C53C00815D7D /* Main.storyboard */,
 				7AFD3B621CE4C53C00815D7D /* Assets.xcassets */,
 				7AFD3B641CE4C53C00815D7D /* LaunchScreen.storyboard */,
@@ -505,6 +510,15 @@
 			path = "video-stream";
 			sourceTree = "<group>";
 		};
+		7AFD3C291CE4CC9700815D7D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7AFD3C2A1CE4CCD800815D7D /* createSession.swift */,
+				7AFD3C2C1CE4D32900815D7D /* createPreview.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -638,10 +652,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFD3C171CE4C87A00815D7D /* FFmpegWrapper.m in Sources */,
+				7AFD3C2B1CE4CCD800815D7D /* createSession.swift in Sources */,
 				7AFD3C131CE4C87A00815D7D /* FFBitstreamFilter.m in Sources */,
 				7AFD3C151CE4C87A00815D7D /* FFInputFile.m in Sources */,
 				7AFD3B5E1CE4C53C00815D7D /* ViewController.swift in Sources */,
 				7AFD3C191CE4C87A00815D7D /* FFOutputStream.m in Sources */,
+				7AFD3C2D1CE4D32900815D7D /* createPreview.swift in Sources */,
 				7AFD3C1A1CE4C87A00815D7D /* FFStream.m in Sources */,
 				7AFD3C1D1CE4C87A00815D7D /* README.md in Sources */,
 				7AFD3B5C1CE4C53C00815D7D /* AppDelegate.swift in Sources */,
