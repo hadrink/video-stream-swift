@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class session: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
+class CreateSession: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
     
     var session: AVCaptureSession?
     var sessionQueue: dispatch_queue_t?
@@ -91,5 +91,6 @@ class session: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataO
         let session = createSession()
         session.startRunning()
     }
+    
 }
 
