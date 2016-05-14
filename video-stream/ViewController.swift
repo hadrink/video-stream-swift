@@ -13,8 +13,7 @@ class ViewController: UIViewController {
     
     var session: Session?
     var preview: Preview?
-    
-    var ffmpegWrapper: FFmpegWrapper!
+    var streamer: Streamer?
 
     @IBOutlet var mainView: UIView!
     
@@ -24,13 +23,15 @@ class ViewController: UIViewController {
         
         session = Session()
         preview = Preview()
+        streamer = Streamer.sharedInstance
         
         let sessionAudioVideo = session?.createSession()
-        let previewAudioVideo = preview?.createPreview(self.view.frame.size, session: sessionAudioVideo!)
+        let previewSize = self.view.frame.size
+        let previewAudioVideo = preview?.createPreview(previewSize, session: sessionAudioVideo!)
         
         mainView.layer.addSublayer(previewAudioVideo!)
         
-        session?.startSession()
+        streamer?.startStreaming("https://castproject.herokuapp.com/stream-test", UploadVideoEvery: 10.0, session: session!.session!, fileName: "test")
     }
 
     override func didReceiveMemoryWarning() {

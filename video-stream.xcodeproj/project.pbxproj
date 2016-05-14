@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A616B6D1CE64F6600674671 /* VideoWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A616B6C1CE64F6600674671 /* VideoWriter.swift */; };
+		7A616B6F1CE769E500674671 /* VideoCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A616B6E1CE769E500674671 /* VideoCompressor.swift */; };
+		7A616B711CE76F1100674671 /* VideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A616B701CE76F1100674671 /* VideoUploader.swift */; };
+		7A616B731CE7B3C800674671 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A616B721CE7B3C800674671 /* Streamer.swift */; };
 		7A93CB941CE4DBB30021B228 /* DeviceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A93CB931CE4DBB30021B228 /* DeviceSettings.swift */; };
 		7A93CB961CE4EC790021B228 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A93CB951CE4EC790021B228 /* Preview.swift */; };
 		7A93CE7D1CE526490021B228 /* FFBitstreamFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A93CDFD1CE526480021B228 /* FFBitstreamFilter.m */; };
@@ -60,6 +64,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A616B6C1CE64F6600674671 /* VideoWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoWriter.swift; sourceTree = "<group>"; };
+		7A616B6E1CE769E500674671 /* VideoCompressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCompressor.swift; sourceTree = "<group>"; };
+		7A616B701CE76F1100674671 /* VideoUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoUploader.swift; sourceTree = "<group>"; };
+		7A616B721CE7B3C800674671 /* Streamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streamer.swift; sourceTree = "<group>"; };
 		7A93CB931CE4DBB30021B228 /* DeviceSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSettings.swift; sourceTree = "<group>"; };
 		7A93CB951CE4EC790021B228 /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7A93CD5E1CE523DF0021B228 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -528,6 +536,10 @@
 				7A93CB931CE4DBB30021B228 /* DeviceSettings.swift */,
 				7AFD3C2A1CE4CCD800815D7D /* Session.swift */,
 				7A93CB951CE4EC790021B228 /* Preview.swift */,
+				7A616B6C1CE64F6600674671 /* VideoWriter.swift */,
+				7A616B6E1CE769E500674671 /* VideoCompressor.swift */,
+				7A616B701CE76F1100674671 /* VideoUploader.swift */,
+				7A616B721CE7B3C800674671 /* Streamer.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -664,9 +676,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A616B6D1CE64F6600674671 /* VideoWriter.swift in Sources */,
 				7A93CE811CE526490021B228 /* FFmpegWrapper.m in Sources */,
 				7A93CB941CE4DBB30021B228 /* DeviceSettings.swift in Sources */,
 				7A93CE841CE526490021B228 /* FFStream.m in Sources */,
+				7A616B731CE7B3C800674671 /* Streamer.swift in Sources */,
 				7A93CE821CE526490021B228 /* FFOutputFile.m in Sources */,
 				7A93CE851CE526490021B228 /* FFUtilities.m in Sources */,
 				7A93CE7E1CE526490021B228 /* FFFile.m in Sources */,
@@ -675,8 +689,10 @@
 				7AFD3B5E1CE4C53C00815D7D /* ViewController.swift in Sources */,
 				7A93CE7F1CE526490021B228 /* FFInputFile.m in Sources */,
 				7A93CE7D1CE526490021B228 /* FFBitstreamFilter.m in Sources */,
+				7A616B6F1CE769E500674671 /* VideoCompressor.swift in Sources */,
 				7AFD3B5C1CE4C53C00815D7D /* AppDelegate.swift in Sources */,
 				7A93CE871CE526490021B228 /* README.md in Sources */,
+				7A616B711CE76F1100674671 /* VideoUploader.swift in Sources */,
 				7A93CE801CE526490021B228 /* FFInputStream.m in Sources */,
 				7A93CB961CE4EC790021B228 /* Preview.swift in Sources */,
 			);

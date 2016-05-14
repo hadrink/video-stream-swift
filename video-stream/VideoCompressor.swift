@@ -1,0 +1,41 @@
+//
+//  VideoCompressor.swift
+//  video-stream
+//
+//  Created by Rplay on 14/05/16.
+//  Copyright © 2016 rplay. All rights reserved.
+//
+
+import Foundation
+
+class VideoCompressor {
+    
+    let ffmpegWrapper: FFmpegWrapper = FFmpegWrapper()
+    let videoUploader: VideoUploader = VideoUploader()
+    let writer = VideoWriter.sharedInstance.writer
+    let writerInput = VideoWriter.sharedInstance.writerInput
+    
+    var URLServer = Streamer.sharedInstance.URLServer
+    
+    func compress(inputPath: String, outputPath: String, videoToWriteIndex: Int) {
+        
+        if writer?.status == .Writing {
+            writerInput?.markAsFinished()
+            //let outputUrl = avAssetWriter.outputURL
+            writer?.finishWritingWithCompletionHandler { () -> Void in
+                //let documentsDirectoryUrl = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+                //let tsFileUrl = documentsDirectoryUrl?.URLByAppendingPathComponent("master\(videoToWriteIndex).ts")
+                self.ffmpegWrapper.convertInputPath(inputPath, outputPath: outputPath, options: nil,
+                    progressBlock: { (a: UInt, b: UInt64, c: UInt64) -> Void in print("a: \(a), \(b), \(c)") },
+                    completionBlock: { (succeeded: Bool, b: NSError!) -> Void in
+                        print("Bool: \(succeeded)\n Error: \(b)")
+                        if succeeded {
+                            //self.dispatch_async_custom();
+                            self.videoUploader.upload(outputPath, URLToUpload: self.URLServer!)
+                        }
+                })
+            }
+        }
+        
+    }
+}

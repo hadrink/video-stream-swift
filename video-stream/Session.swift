@@ -18,6 +18,9 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     var outputVideo: AVCaptureVideoDataOutput?
     var outputAudio: AVCaptureAudioDataOutput?
     
+    let writer = VideoWriter.sharedInstance.writer
+    let writerInput = VideoWriter.sharedInstance.writerInput
+    
     let deviceSettings = DeviceSettings()
     
     func createSession() -> AVCaptureSession {
@@ -37,7 +40,7 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     func addVideoInput() {
         
         let deviceVideo = deviceSettings.getVideoDevice()
-        var addInputVideoError: NSError? = nil
+        var addInputVideoError: NSError?
         
         do {
             try inputVideo = AVCaptureDeviceInput(device: deviceVideo)
@@ -84,6 +87,26 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
         
         if session!.canAddOutput(outputAudio) {
             session!.addOutput(outputAudio)
+        }
+    }
+    
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+        if writerInput!.readyForMoreMediaData {
+            writerInput?.appendSampleBuffer(sampleBuffer)
+            let status = writer!.status
+            //let error = writer?.error
+            switch status {
+            case .Unknown:
+                print("Unknown")
+            case .Writing:
+                print("Writing")
+            case .Completed:
+                print("Completed")
+            case .Failed:
+                print("Failed")
+            case .Cancelled:
+                print("Cancelled")
+            }
         }
     }
     
