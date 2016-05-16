@@ -13,14 +13,16 @@ class VideoCompressor {
     let ffmpegWrapper: FFmpegWrapper = FFmpegWrapper()
     let videoUploader: VideoUploader = VideoUploader()
     let writer = VideoWriter.sharedInstance.writer
-    let writerInput = VideoWriter.sharedInstance.writerInput
+    let writerInputVideo = VideoWriter.sharedInstance.writerInputVideo
+    let writerInputAudio = VideoWriter.sharedInstance.writerInputAudio
     
     var URLServer = Streamer.sharedInstance.URLServer
     
     func compress(inputPath: String, outputPath: String, videoToWriteIndex: Int) {
         
         if writer?.status == .Writing {
-            writerInput?.markAsFinished()
+            writerInputVideo?.markAsFinished()
+            writerInputAudio?.markAsFinished()
             //let outputUrl = avAssetWriter.outputURL
             writer?.finishWritingWithCompletionHandler { () -> Void in
                 //let documentsDirectoryUrl = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last

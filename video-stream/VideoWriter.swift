@@ -14,7 +14,8 @@ class VideoWriter {
     static let sharedInstance = VideoWriter()
     
     var writer: AVAssetWriter?
-    var writerInput: AVAssetWriterInput?
+    var writerInputVideo: AVAssetWriterInput?
+    var writerInputAudio: AVAssetWriterInput?
     var index = 0
     
     func setup() {
@@ -31,11 +32,24 @@ class VideoWriter {
         }
         
         writer = try? AVAssetWriter(URL: saveFileURL!, fileType: AVFileTypeQuickTimeMovie)
-        writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264,
+        writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264,
                                                                                        AVVideoWidthKey : 240,
                                                                                        AVVideoHeightKey: 240])
-        writerInput?.expectsMediaDataInRealTime = true
-        writer?.addInput(writerInput!)
+        writerInputVideo?.expectsMediaDataInRealTime = true
+        
+        let audioOutputSettings: Dictionary<String, AnyObject> = [
+            AVFormatIDKey : Int(kAudioFormatMPEG4AAC),
+            AVNumberOfChannelsKey : 2,
+            AVSampleRateKey : 44100
+            //AVEncoderBitRateKey : 128000
+        ]
+        
+        writerInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: audioOutputSettings)
+        
+        writerInputAudio?.expectsMediaDataInRealTime = true
+        
+        writer?.addInput(writerInputVideo!)
+        writer?.addInput(writerInputAudio!)
         
         print("Output URL: \(writer?.outputURL)")
         // 10 frames per second
