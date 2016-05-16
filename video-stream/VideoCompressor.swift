@@ -25,6 +25,8 @@ class VideoCompressor {
             writer?.finishWritingWithCompletionHandler { () -> Void in
                 //let documentsDirectoryUrl = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
                 //let tsFileUrl = documentsDirectoryUrl?.URLByAppendingPathComponent("master\(videoToWriteIndex).ts")
+                print("Input: \(inputPath)")
+                print("Output: \(outputPath)")
                 self.ffmpegWrapper.convertInputPath(inputPath, outputPath: outputPath, options: nil,
                     progressBlock: { (a: UInt, b: UInt64, c: UInt64) -> Void in print("a: \(a), \(b), \(c)") },
                     completionBlock: { (succeeded: Bool, b: NSError!) -> Void in

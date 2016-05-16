@@ -10,7 +10,9 @@ import Foundation
 
 class VideoUploader {
     
+    var videoWriter = VideoWriter.sharedInstance
     var index = VideoWriter.sharedInstance.index
+    var streamer = Streamer.sharedInstance
     
     func upload(videoToUpload: String, URLToUpload: String) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
@@ -78,7 +80,7 @@ class VideoUploader {
                                                                     //self.currentIndex = self.currentIndex + 1
                                                                     VideoWriter.sharedInstance.index + 1
                                                                     
-                                                                    let cacheDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).last
+                                                                    /*let cacheDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).last
                                                                     let saveFileURL = cacheDirectoryURL?.URLByAppendingPathComponent("capture\(self.currentIndex).mp4")
                                                                     if NSFileManager.defaultManager().fileExistsAtPath(saveFileURL!.path!) {
                                                                         do {
@@ -97,7 +99,10 @@ class VideoUploader {
                                                                     
                                                                     self.avAssetWriter.startWriting()
                                                                     self.avAssetWriter.startSessionAtSourceTime(CMTimeMakeWithSeconds(5, 600))
-                                                                    self.captureSession.startRunning()
+                                                                    self.captureSession.startRunning()*/
+                                                                    self.videoWriter.setup()
+                                                                    self.videoWriter.startWriting()
+                                                                    self.streamer.session?.startRunning()
                                                                 }
             }).resume() // completionHandler
         } //else

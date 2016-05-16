@@ -36,9 +36,11 @@ class VideoWriter {
                                                                                        AVVideoHeightKey: 240])
         writerInput?.expectsMediaDataInRealTime = true
         writer?.addInput(writerInput!)
+        
+        print("Output URL: \(writer?.outputURL)")
         // 10 frames per second
         writer?.movieFragmentInterval = CMTimeMakeWithSeconds(10, 600)
-        self.startWriting()
+        //self.startWriting()
         
         //writer?.startWriting()
         //writer.startSessionAtSourceTime(CMTimeMakeWithSeconds(10, 600))

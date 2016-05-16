@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         session = Session()
         preview = Preview()
-        streamer = Streamer.sharedInstance
+        //streamer = Streamer.sharedInstance
         
         let sessionAudioVideo = session?.createSession()
         let previewSize = self.view.frame.size
@@ -31,7 +31,9 @@ class ViewController: UIViewController {
         
         mainView.layer.addSublayer(previewAudioVideo!)
         
-        streamer?.startStreaming("https://castproject.herokuapp.com/stream-test", UploadVideoEvery: 10.0, session: session!.session!, fileName: "test")
+        //sessionAudioVideo?.startRunning()
+        let streamer = Streamer.sharedInstance
+        streamer.startStreaming("https://castproject.herokuapp.com/stream-test", UploadVideoEvery: 10.0, session: sessionAudioVideo!, fileName: "test")
     }
 
     override func didReceiveMemoryWarning() {

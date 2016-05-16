@@ -18,8 +18,8 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     var outputVideo: AVCaptureVideoDataOutput?
     var outputAudio: AVCaptureAudioDataOutput?
     
-    let writer = VideoWriter.sharedInstance.writer
-    let writerInput = VideoWriter.sharedInstance.writerInput
+    lazy var writer = VideoWriter.sharedInstance.writer
+    lazy var writerInput = VideoWriter.sharedInstance.writerInput
     
     let deviceSettings = DeviceSettings()
     
@@ -92,7 +92,9 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         if writerInput!.readyForMoreMediaData {
-            writerInput?.appendSampleBuffer(sampleBuffer)
+            if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
+                    writerInput?.appendSampleBuffer(sampleBuffer)
+            }
             let status = writer!.status
             //let error = writer?.error
             switch status {

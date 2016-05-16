@@ -34,6 +34,7 @@
 		7A93CE901CE52A8D0021B228 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A93CE8F1CE52A8D0021B228 /* libz.tbd */; };
 		7A93CE921CE52AC70021B228 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A93CE911CE52AC70021B228 /* libbz2.tbd */; };
 		7A93CE941CE52AE20021B228 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A93CE931CE52AE20021B228 /* libiconv.tbd */; };
+		7AF8550C1CE9F1B2000B7279 /* ClearCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF8550B1CE9F1B2000B7279 /* ClearCache.swift */; };
 		7AFD3B5C1CE4C53C00815D7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD3B5B1CE4C53C00815D7D /* AppDelegate.swift */; };
 		7AFD3B5E1CE4C53C00815D7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD3B5D1CE4C53C00815D7D /* ViewController.swift */; };
 		7AFD3B611CE4C53C00815D7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFD3B5F1CE4C53C00815D7D /* Main.storyboard */; };
@@ -193,6 +194,7 @@
 		7A93CE8F1CE52A8D0021B228 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7A93CE911CE52AC70021B228 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		7A93CE931CE52AE20021B228 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		7AF8550B1CE9F1B2000B7279 /* ClearCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCache.swift; sourceTree = "<group>"; };
 		7AFD3B581CE4C53C00815D7D /* video-stream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "video-stream.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFD3B5B1CE4C53C00815D7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFD3B5D1CE4C53C00815D7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				7A616B6E1CE769E500674671 /* VideoCompressor.swift */,
 				7A616B701CE76F1100674671 /* VideoUploader.swift */,
 				7A616B721CE7B3C800674671 /* Streamer.swift */,
+				7AF8550B1CE9F1B2000B7279 /* ClearCache.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				7A93CE841CE526490021B228 /* FFStream.m in Sources */,
 				7A616B731CE7B3C800674671 /* Streamer.swift in Sources */,
 				7A93CE821CE526490021B228 /* FFOutputFile.m in Sources */,
+				7AF8550C1CE9F1B2000B7279 /* ClearCache.swift in Sources */,
 				7A93CE851CE526490021B228 /* FFUtilities.m in Sources */,
 				7A93CE7E1CE526490021B228 /* FFFile.m in Sources */,
 				7A93CE831CE526490021B228 /* FFOutputStream.m in Sources */,
