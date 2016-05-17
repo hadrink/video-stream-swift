@@ -16,7 +16,7 @@ class VideoWriter {
     var writer: AVAssetWriter?
     var writerInputVideo: AVAssetWriterInput?
     var writerInputAudio: AVAssetWriterInput?
-    var index = 0
+    var index = Streamer.sharedInstance.index
     
     func setup() {
         let cacheDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).last

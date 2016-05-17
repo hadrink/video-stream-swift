@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         
         //sessionAudioVideo?.startRunning()
         streamer = Streamer.sharedInstance
-        streamer?.startStreaming("https://castproject.herokuapp.com/stream-test", UploadVideoEvery: 10.0, session: sessionAudioVideo!, fileName: "test")
+        streamer?.startStreaming("http://vps224869.ovh.net:3005/stream-test/", UploadVideoEvery: 10.0, session: sessionAudioVideo!, fileName: "test")
     }
 
     override func didReceiveMemoryWarning() {
