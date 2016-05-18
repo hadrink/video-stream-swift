@@ -30,12 +30,14 @@ class VideoUploader {
             if nil != tsData {
                 NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: tsData,
                     completionHandler: { (responseData: NSData?, response: NSURLResponse?, responseError: NSError?) -> Void in
+                        print("END REQUEST TS FILE")
                         self.updateM3U8File(responseData, response: response, responseError: responseError, URLToUpload: URLToUpload)
                 }).resume() //handler
             } else {
                 print("No data")
             }
         })
+        //restartWriting()
     }
     
     func updateM3U8File(responseData: NSData!, response: NSURLResponse!, responseError: NSError!, URLToUpload: String) {
@@ -72,45 +74,27 @@ class VideoUploader {
             let playlistData = m3u8String.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             playlistRequest.HTTPBody = playlistData
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(playlistRequest, fromData: playlistData,
-                                                               completionHandler: { (playlistResponseData: NSData?, playlistResponse: NSURLResponse?, playlistError: NSError?) -> Void in
-                                                                if responseData != nil {
-                                                                    let responseString = NSString(data: responseData, encoding: NSUTF8StringEncoding)
-                                                                    if responseString != nil {
-                                                                        print(responseString)
-                                                                    }
-                                                                }
-                                                                if responseError != nil {
-                                                                    dispatch_async(dispatch_get_main_queue(), { () -> Void in print("\(responseError.localizedDescription)") })
-                                                                } else {
-                                                                    //self.currentIndex = self.currentIndex + 1
-                                                                    Streamer.sharedInstance.index = self.index! + 1
-                                                                    
-                                                                    /*let cacheDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).last
-                                                                    let saveFileURL = cacheDirectoryURL?.URLByAppendingPathComponent("capture\(self.currentIndex).mp4")
-                                                                    if NSFileManager.defaultManager().fileExistsAtPath(saveFileURL!.path!) {
-                                                                        do {
-                                                                            try NSFileManager.defaultManager().removeItemAtURL(saveFileURL!)
-                                                                        } catch _ {
-                                                                        }
-                                                                    }
-                                                                    
-                                                                    self.avAssetWriter = try? AVAssetWriter(URL: saveFileURL!, fileType: AVFileTypeQuickTimeMovie)
-                                                                    self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo,
-                                                                        outputSettings: [AVVideoCodecKey:AVVideoCodecH264,       AVVideoWidthKey: 240,
-                                                                            AVVideoHeightKey: 240])
-                                                                    self.avAssetWriterInput.expectsMediaDataInRealTime = true
-                                                                    self.avAssetWriter.addInput(self.avAssetWriterInput)
-                                                                    self.avAssetWriter.movieFragmentInterval = CMTimeMakeWithSeconds(5, 600)
-                                                                    
-                                                                    self.avAssetWriter.startWriting()
-                                                                    self.avAssetWriter.startSessionAtSourceTime(CMTimeMakeWithSeconds(5, 600))
-                                                                    self.captureSession.startRunning()*/
-                                                                    self.videoWriter.setup()
-                                                                    self.videoWriter.startWriting()
-                                                                    self.streamer.session?.startRunning()
-                                                                }
+            NSURLSession.sharedSession().uploadTaskWithRequest(playlistRequest, fromData: playlistData, completionHandler: { (playlistResponseData: NSData?, playlistResponse: NSURLResponse?, playlistError: NSError?) -> Void in
+                if responseData != nil {
+                    let responseString = NSString(data: responseData, encoding: NSUTF8StringEncoding)
+                    if responseString != nil {
+                        print(responseString)
+                    }
+                }
+                if responseError != nil {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in print("\(responseError.localizedDescription)") })
+                } else {
+                    print("END REQUEST M3U8 FILE")
+                }
             }).resume() // completionHandler
+            
         } //else
     }
+    
+    /*func restartWriting(){
+        Streamer.sharedInstance.index = self.index! + 1
+        self.videoWriter.setup()
+        self.videoWriter.startWriting()
+        self.streamer.session?.startRunning()
+    }*/
 }

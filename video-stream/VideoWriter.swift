@@ -16,7 +16,7 @@ class VideoWriter {
     var writer: AVAssetWriter?
     var writerInputVideo: AVAssetWriterInput?
     var writerInputAudio: AVAssetWriterInput?
-    
+    var streamer = Streamer.sharedInstance
     
     func setup() {
         
@@ -59,10 +59,7 @@ class VideoWriter {
         print("Output URL: \(writer?.outputURL)")
         // 10 frames per second
         writer?.movieFragmentInterval = CMTimeMakeWithSeconds(10, 600)
-        //self.startWriting()
         
-        //writer?.startWriting()
-        //writer.startSessionAtSourceTime(CMTimeMakeWithSeconds(10, 600))
     }
     
     func startWriting() {
@@ -81,19 +78,36 @@ class VideoWriter {
                 writerInputAudio?.appendSampleBuffer(sampleBuffer)
             }
         }
+        
         let status = writer!.status
          //let error = writer?.error
          switch status {
-         case .Unknown:
-         print("Unknown")
-         case .Writing:
-         print("Writing")
-         case .Completed:
-         print("Completed")
-         case .Failed:
-         print("Failed")
-         case .Cancelled:
-         print("Cancelled")
+            case .Unknown:
+                print("Unknown")
+            case .Writing:
+                print("Writing")
+            case .Completed:
+                print("Completed")
+            case .Failed:
+                print("Failed")
+            case .Cancelled:
+                print("Cancelled")
          }
+    }
+    
+    func restartWriting(){
+        let status = writer!.status
+        
+        if status != .Unknown {
+            let index = Streamer.sharedInstance.index
+            Streamer.sharedInstance.index = index! + 1
+            print("INDEX \(index!)")
+            setup()
+            startWriting()
+            streamer.session?.startRunning()
+        }
+        else {
+            restartWriting()
+        }
     }
 }

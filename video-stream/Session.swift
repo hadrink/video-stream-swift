@@ -92,32 +92,7 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-        
             videoWriter.write(sampleBuffer)
-        
-            /*if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
-                if writerInputVideo!.readyForMoreMediaData {
-                    writerInputVideo?.appendSampleBuffer(sampleBuffer)
-                }
-            } else {
-                if writerInputAudio!.readyForMoreMediaData {
-                    writerInputAudio?.appendSampleBuffer(sampleBuffer)
-                }
-            }*/
-            /*let status = writer!.status
-            //let error = writer?.error
-            switch status {
-            case .Unknown:
-                print("Unknown")
-            case .Writing:
-                print("Writing")
-            case .Completed:
-                print("Completed")
-            case .Failed:
-                print("Failed")
-            case .Cancelled:
-                print("Cancelled")
-            }*/
     }
     
     func startSession() {
