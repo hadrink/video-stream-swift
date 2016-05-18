@@ -11,7 +11,7 @@ import Foundation
 class VideoUploader {
     
     var videoWriter = VideoWriter.sharedInstance
-    var index = VideoWriter.sharedInstance.index
+    var index = Streamer.sharedInstance.index
     var streamer = Streamer.sharedInstance
     
     
@@ -20,7 +20,7 @@ class VideoUploader {
             //var urlString = "\(self.endpointUrlString)/master\(self.currentIndex).ts/"
             //var urlString = "http://vps224869.ovh.net/cast/put.php?filename=master\(self.currentIndex).ts"
             print("URL TO UPLOAD: \(URLToUpload)\(self.streamer.fileName!)\(self.index!).ts/")
-            let fileToSend = "\(self.streamer.fileName!)\(self.index).ts/"
+            let fileToSend = "\(self.streamer.fileName!)\(self.index!).ts/"
             let request = NSMutableURLRequest(URL: NSURL(string: URLToUpload+fileToSend)!)
             
             request.HTTPMethod = "PUT"
@@ -48,20 +48,20 @@ class VideoUploader {
         if responseError != nil {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in print("\(responseError.localizedDescription)") })
         } else {
-            var m3u8String = "#EXTM3U\n#EXT-X-TARGETDURATION:10\n#EXT-X-VERSION:3\n#EXT-X-MEDIA-SEQUENCE:\(index)\n"
+            var m3u8String = "#EXTM3U\n#EXT-X-TARGETDURATION:10\n#EXT-X-VERSION:3\n#EXT-X-MEDIA-SEQUENCE:\(index!)\n"
             
             if index! - 2 >= 0 {
                 m3u8String += "#EXTINT:10.0,\n"
-                m3u8String += "master\(index).ts\n"
+                m3u8String += "\(self.streamer.fileName!)\(index! - 2).ts\n"
             }
             
             if index! - 1 >= 0 {
                 m3u8String += "#EXTINT:10.0,\n"
-                m3u8String += "master\(index).ts\n"
+                m3u8String += "\(self.streamer.fileName!)\(index! - 1).ts\n"
             }
             
             m3u8String += "#EXTINT:10.0,\n"
-            m3u8String += "master\(index).ts\n"
+            m3u8String += "\(self.streamer.fileName!)\(index!).ts\n"
             
             //var playlistUrlString = "\(self.endpointUrlString)?filename=master.m3u8"
             let fileToSend = "\(self.streamer.fileName!).m3u8/"
@@ -84,7 +84,7 @@ class VideoUploader {
                                                                     dispatch_async(dispatch_get_main_queue(), { () -> Void in print("\(responseError.localizedDescription)") })
                                                                 } else {
                                                                     //self.currentIndex = self.currentIndex + 1
-                                                                    VideoWriter.sharedInstance.index = VideoWriter.sharedInstance.index! + 1
+                                                                    Streamer.sharedInstance.index = self.index! + 1
                                                                     
                                                                     /*let cacheDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).last
                                                                     let saveFileURL = cacheDirectoryURL?.URLByAppendingPathComponent("capture\(self.currentIndex).mp4")

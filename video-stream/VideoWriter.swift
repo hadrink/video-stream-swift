@@ -16,9 +16,14 @@ class VideoWriter {
     var writer: AVAssetWriter?
     var writerInputVideo: AVAssetWriterInput?
     var writerInputAudio: AVAssetWriterInput?
-    var index = Streamer.sharedInstance.index
+    
     
     func setup() {
+        
+        print("SETUP")
+        let index = Streamer.sharedInstance.index
+        
+        print("Index\(index)")
         let cacheDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).last
         let saveFileURL = cacheDirectoryURL?.URLByAppendingPathComponent("capture\(index).mp4")
         
@@ -65,4 +70,30 @@ class VideoWriter {
         writer?.startSessionAtSourceTime(CMTimeMakeWithSeconds(10, 600))
     }
     
+    func write(sampleBuffer: CMSampleBuffer) {
+        
+        if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
+            if writerInputVideo!.readyForMoreMediaData {
+                writerInputVideo?.appendSampleBuffer(sampleBuffer)
+            }
+        } else {
+            if writerInputAudio!.readyForMoreMediaData {
+                writerInputAudio?.appendSampleBuffer(sampleBuffer)
+            }
+        }
+        let status = writer!.status
+         //let error = writer?.error
+         switch status {
+         case .Unknown:
+         print("Unknown")
+         case .Writing:
+         print("Writing")
+         case .Completed:
+         print("Completed")
+         case .Failed:
+         print("Failed")
+         case .Cancelled:
+         print("Cancelled")
+         }
+    }
 }

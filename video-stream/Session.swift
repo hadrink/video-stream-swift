@@ -18,16 +18,16 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     var outputVideo: AVCaptureVideoDataOutput?
     var outputAudio: AVCaptureAudioDataOutput?
     
-    lazy var writer = VideoWriter.sharedInstance.writer
-    lazy var writerInputVideo = VideoWriter.sharedInstance.writerInputVideo
-    lazy var writerInputAudio = VideoWriter.sharedInstance.writerInputAudio
+    lazy var videoWriter = VideoWriter.sharedInstance
+    //lazy var writerInputVideo = VideoWriter.sharedInstance.writerInputVideo
+    //lazy var writerInputAudio = VideoWriter.sharedInstance.writerInputAudio
     
     let deviceSettings = DeviceSettings()
     
     func createSession() -> AVCaptureSession {
         sessionQueue = dispatch_queue_create("cameraQueue", DISPATCH_QUEUE_SERIAL)
         session = AVCaptureSession()
-        session?.sessionPreset = AVCaptureSessionPreset352x288
+        session?.sessionPreset = AVCaptureSessionPresetLow
         
         addVideoInput()
         addAudioInput()
@@ -93,7 +93,9 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         
-            if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
+            videoWriter.write(sampleBuffer)
+        
+            /*if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
                 if writerInputVideo!.readyForMoreMediaData {
                     writerInputVideo?.appendSampleBuffer(sampleBuffer)
                 }
@@ -101,8 +103,8 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
                 if writerInputAudio!.readyForMoreMediaData {
                     writerInputAudio?.appendSampleBuffer(sampleBuffer)
                 }
-            }
-            let status = writer!.status
+            }*/
+            /*let status = writer!.status
             //let error = writer?.error
             switch status {
             case .Unknown:
@@ -115,7 +117,7 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
                 print("Failed")
             case .Cancelled:
                 print("Cancelled")
-            }
+            }*/
     }
     
     func startSession() {
