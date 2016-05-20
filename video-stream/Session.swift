@@ -12,6 +12,7 @@ import AVFoundation
 class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
     
     var session: AVCaptureSession?
+    var connection: AVCaptureConnection?
     var sessionQueue: dispatch_queue_t?
     var inputVideo: AVCaptureDeviceInput?
     var inputAudio: AVCaptureDeviceInput?
@@ -92,7 +93,13 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-            videoWriter.write(sampleBuffer)
+        if connection.supportsVideoOrientation {
+            connection.videoOrientation = AVCaptureVideoOrientation.Portrait
+        }
+        else {
+            print("NO ORIENTATION")
+        }
+        videoWriter.write(sampleBuffer)
     }
     
     func startSession() {

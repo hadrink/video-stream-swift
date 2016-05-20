@@ -20,6 +20,8 @@ class VideoWriter {
     var bufferVideoLate: [CMSampleBuffer] = []
     var bufferAudioLate: [CMSampleBuffer] = []
     
+    var isStart:Bool?
+    
     func setup() {
         
         print("SETUP")
@@ -39,10 +41,9 @@ class VideoWriter {
         }
         
         writer = try? AVAssetWriter(URL: saveFileURL!, fileType: AVFileTypeQuickTimeMovie)
-        writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264,
-                                                                                       AVVideoWidthKey : 240,
-                                                                                       AVVideoHeightKey: 240])
+        writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264, AVVideoWidthKey : 240, AVVideoHeightKey: 320])
         writerInputVideo?.expectsMediaDataInRealTime = true
+        writerInputVideo?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
         
         let audioOutputSettings: Dictionary<String, AnyObject> = [
             AVFormatIDKey : Int(kAudioFormatMPEG4AAC),
@@ -60,38 +61,40 @@ class VideoWriter {
         
         print("Output URL: \(writer?.outputURL)")
         // 10 frames per second
-        writer?.movieFragmentInterval = CMTimeMakeWithSeconds(10, 600)
+        writer?.movieFragmentInterval = CMTimeMakeWithSeconds(streamer.readingTime! , 600)
         
     }
     
     func startWriting() {
         writer?.startWriting()
-        writer?.startSessionAtSourceTime(CMTimeMakeWithSeconds(10, 600))
+        writer?.startSessionAtSourceTime(CMTimeMakeWithSeconds(streamer.readingTime! , 600))
+        isStart = true
     }
     
     func write(sampleBuffer: CMSampleBuffer) {
         
-        if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
-            if writerInputVideo!.readyForMoreMediaData {
-                for buffer in bufferVideoLate {
-                    writerInputVideo?.appendSampleBuffer(buffer)
+        if isStart! {
+            if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
+                if writerInputVideo!.readyForMoreMediaData {
+                    for buffer in bufferVideoLate {
+                        writerInputVideo?.appendSampleBuffer(buffer)
+                    }
+                    bufferVideoLate.removeAll()
+                    writerInputVideo?.appendSampleBuffer(sampleBuffer)
                 }
-                bufferVideoLate.removeAll()
-                writerInputVideo?.appendSampleBuffer(sampleBuffer)
-            }
-        } else {
-            if writerInputAudio!.readyForMoreMediaData {
-                for buffer in bufferAudioLate {
-                    writerInputAudio?.appendSampleBuffer(buffer)
+            } else if CMSampleBufferGetDataBuffer(sampleBuffer) != nil {
+                if writerInputAudio!.readyForMoreMediaData {
+                    for buffer in bufferAudioLate {
+                        writerInputAudio?.appendSampleBuffer(buffer)
+                    }
+                    bufferAudioLate.removeAll()
+                    writerInputAudio?.appendSampleBuffer(sampleBuffer)
                 }
-                bufferAudioLate.removeAll()
-                writerInputAudio?.appendSampleBuffer(sampleBuffer)
             }
-        }
-        
-        let status = writer!.status
-         //let error = writer?.error
-         switch status {
+            
+            let status = writer!.status
+            //let error = writer?.error
+            switch status {
             case .Unknown:
                 print("Unknown")
                 if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
@@ -107,22 +110,16 @@ class VideoWriter {
                 print("Failed")
             case .Cancelled:
                 print("Cancelled")
-         }
+            }
+        }
     }
     
     func restartWriting(){
-        let status = writer!.status
-        
-        if status != .Unknown {
-            let index = Streamer.sharedInstance.index
-            Streamer.sharedInstance.index = index! + 1
-            print("INDEX \(index!)")
-            setup()
-            startWriting()
-            streamer.session?.startRunning()
-        }
-        else {
-            restartWriting()
-        }
+        let index = Streamer.sharedInstance.index
+        Streamer.sharedInstance.index = index! + 1
+        print("INDEX \(index!)")
+        setup()
+        startWriting()
+        //streamer.session?.startRunning()
     }
 }

@@ -21,8 +21,10 @@ class Streamer: NSObject {
     var session: AVCaptureSession?
     var videoCompressor: VideoCompressor?
     var clearCache: ClearCache?
+    var readingTime:Double?
     
     func startStreaming(URLServer: String, UploadVideoEvery: Double, session: AVCaptureSession, fileName: String) {
+        self.readingTime = UploadVideoEvery
         self.fileName = fileName
         self.URLServer = URLServer
         self.session = session

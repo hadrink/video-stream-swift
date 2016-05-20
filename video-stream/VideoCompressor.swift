@@ -27,7 +27,7 @@ class VideoCompressor {
             writerInputAudio?.markAsFinished()
             
             writer?.finishWritingWithCompletionHandler { () -> Void in
-                
+                self.videoWriter.isStart = false
                 self.videoWriter.restartWriting()
                 
                 print("Input: \(inputPath)")

@@ -50,19 +50,19 @@ class VideoUploader {
         if responseError != nil {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in print("\(responseError.localizedDescription)") })
         } else {
-            var m3u8String = "#EXTM3U\n#EXT-X-TARGETDURATION:10\n#EXT-X-VERSION:3\n#EXT-X-MEDIA-SEQUENCE:\(index!)\n"
+            var m3u8String = "#EXTM3U\n#EXT-X-TARGETDURATION:\(Int(streamer.readingTime!))\n#EXT-X-VERSION:2\n#EXT-X-MEDIA-SEQUENCE:\(index!)\n"
             
-            if index! - 2 >= 0 {
+            /*if index! - 2 >= 0 {
                 m3u8String += "#EXTINT:10.0,\n"
                 m3u8String += "\(self.streamer.fileName!)\(index! - 2).ts\n"
-            }
+            }*/
             
             if index! - 1 >= 0 {
-                m3u8String += "#EXTINT:10.0,\n"
+                m3u8String += "#EXTINT:\(streamer.readingTime!),\n"
                 m3u8String += "\(self.streamer.fileName!)\(index! - 1).ts\n"
             }
             
-            m3u8String += "#EXTINT:10.0,\n"
+            m3u8String += "#EXTINT:\(streamer.readingTime!),\n"
             m3u8String += "\(self.streamer.fileName!)\(index!).ts\n"
             
             //var playlistUrlString = "\(self.endpointUrlString)?filename=master.m3u8"
