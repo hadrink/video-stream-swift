@@ -42,8 +42,8 @@ class VideoWriter {
         
         writer = try? AVAssetWriter(URL: saveFileURL!, fileType: AVFileTypeQuickTimeMovie)
         writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264, AVVideoWidthKey : 240, AVVideoHeightKey: 320])
-        writerInputVideo?.expectsMediaDataInRealTime = true
         writerInputVideo?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+        writerInputVideo?.expectsMediaDataInRealTime = true
         
         let audioOutputSettings: Dictionary<String, AnyObject> = [
             AVFormatIDKey : Int(kAudioFormatMPEG4AAC),

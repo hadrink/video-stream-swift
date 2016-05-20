@@ -20,8 +20,6 @@ class Preview {
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
         
-        session.connecti addConnection(previewLayer!.connection)
-        
         return previewLayer
     }
 }

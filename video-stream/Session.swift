@@ -93,12 +93,6 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-        if connection.supportsVideoOrientation {
-            connection.videoOrientation = AVCaptureVideoOrientation.Portrait
-        }
-        else {
-            print("NO ORIENTATION")
-        }
         videoWriter.write(sampleBuffer)
     }
     
