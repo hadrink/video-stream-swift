@@ -17,6 +17,8 @@ class VideoWriter {
     var writerInputVideo: AVAssetWriterInput?
     var writerInputAudio: AVAssetWriterInput?
     var streamer = Streamer.sharedInstance
+    var bufferVideoLate: [CMSampleBuffer] = []
+    var bufferAudioLate: [CMSampleBuffer] = []
     
     func setup() {
         
@@ -71,10 +73,18 @@ class VideoWriter {
         
         if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
             if writerInputVideo!.readyForMoreMediaData {
+                for buffer in bufferVideoLate {
+                    writerInputVideo?.appendSampleBuffer(buffer)
+                }
+                bufferVideoLate.removeAll()
                 writerInputVideo?.appendSampleBuffer(sampleBuffer)
             }
         } else {
             if writerInputAudio!.readyForMoreMediaData {
+                for buffer in bufferAudioLate {
+                    writerInputAudio?.appendSampleBuffer(buffer)
+                }
+                bufferAudioLate.removeAll()
                 writerInputAudio?.appendSampleBuffer(sampleBuffer)
             }
         }
@@ -84,6 +94,11 @@ class VideoWriter {
          switch status {
             case .Unknown:
                 print("Unknown")
+                if CMSampleBufferGetImageBuffer(sampleBuffer) != nil {
+                    bufferVideoLate.append(sampleBuffer)
+                } else {
+                    bufferAudioLate.append(sampleBuffer)
+                }
             case .Writing:
                 print("Writing")
             case .Completed:
