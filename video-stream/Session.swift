@@ -28,7 +28,7 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     func createSession() -> AVCaptureSession {
         sessionQueue = dispatch_queue_create("cameraQueue", DISPATCH_QUEUE_SERIAL)
         session = AVCaptureSession()
-        session?.sessionPreset = AVCaptureSessionPresetLow
+        session?.sessionPreset = AVCaptureSessionPreset640x480
         
         addVideoInput()
         addAudioInput()
@@ -36,12 +36,14 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
         addVideoOutput()
         addAudioOutput()
         
+        
         return session!
     }
     
     func addVideoInput() {
         
         let deviceVideo = deviceSettings.getVideoDevice()
+        deviceSettings.configureDevice(deviceVideo)
         var addInputVideoError: NSError?
         
         do {
@@ -93,6 +95,10 @@ class Session: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+        if connection.supportsVideoOrientation {
+            connection.videoOrientation = AVCaptureVideoOrientation.Portrait
+        }
+        
         videoWriter.write(sampleBuffer)
     }
     

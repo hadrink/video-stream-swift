@@ -27,13 +27,14 @@ class ViewController: UIViewController {
         
         let sessionAudioVideo = session?.createSession()
         let previewSize = self.view.frame.size
+        print(previewSize)
         let previewAudioVideo = preview?.createPreview(previewSize, session: sessionAudioVideo!)
         
         mainView.layer.addSublayer(previewAudioVideo!)
         
         //sessionAudioVideo?.startRunning()
         streamer = Streamer.sharedInstance
-        streamer?.startStreaming("http://vps224869.ovh.net:3005/stream-test/", UploadVideoEvery: 5.0, session: sessionAudioVideo!, fileName: "test")
+        streamer?.startStreaming("http://vps224869.ovh.net:3005/stream-test/", UploadVideoEvery: 5.0, session: sessionAudioVideo!, previewSize: previewSize, fileName: "test")
     }
 
     override func didReceiveMemoryWarning() {

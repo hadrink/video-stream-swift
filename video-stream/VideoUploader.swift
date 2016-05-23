@@ -28,9 +28,19 @@ class VideoUploader {
             let tsData = NSData(contentsOfURL: videoURL)
             request.HTTPBody = tsData
             if nil != tsData {
+                
+                var startTime: CFAbsoluteTime?
+                startTime = CFAbsoluteTimeGetCurrent()
+                
                 NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: tsData,
                     completionHandler: { (responseData: NSData?, response: NSURLResponse?, responseError: NSError?) -> Void in
                         print("END REQUEST TS FILE")
+                        let elapsedTime = CFAbsoluteTimeGetCurrent() - startTime!
+                        let dataSize = Double(tsData!.length / 1024)
+                        //print("Time interval: \(elapsedTime)")
+                        //print("Data size: \(dataSize) Kb")
+                        //print("Bandwidth: \(dataSize / elapsedTime) Kb/s")
+                        self.videoWriter.bandwidth = dataSize / elapsedTime
                         self.updateM3U8File(responseData, response: response, responseError: responseError, URLToUpload: URLToUpload)
                 }).resume() //handler
             } else {

@@ -29,20 +29,21 @@ class DeviceSettings {
         return videoDevice!
     }
 
-    func configureDevice() -> Void {
-        if let device = videoDevice {
+    func configureDevice(videoDevice: AVCaptureDevice) -> Void {
             do {
-                try device.lockForConfiguration()
+                try videoDevice.lockForConfiguration()
             } catch _ {
                 print("Device KO");
             }
             //-- Lock focus
-            device.focusMode = .Locked
+            videoDevice.focusMode = .Locked
+            
             //-- 1/20 of a second i.e 0.05seconds interval between frame
-            device.activeVideoMinFrameDuration = CMTimeMake(1, 20)
+            //videoDevice.activeVideoMaxFrameDuration = CMTimeMake(10, 1)
+            videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 10)
             //--
-            device.unlockForConfiguration()
+            videoDevice.unlockForConfiguration()
+        
         }
-    }
     
 }
