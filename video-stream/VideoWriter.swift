@@ -135,9 +135,8 @@ class VideoWriter {
         let mediumQuality: CGSize = CGSize(width: 640, height: 480)
         let lowQuality: CGSize = CGSize(width: 352, height: 288)
         
-        let compressionProperties: NSDictionary = [AVVideoExpectedSourceFrameRateKey : 10,
-                                                   AVVideoMaxKeyFrameIntervalDurationKey : 10,
-                                                   AVVideoAverageBitRateKey: 50 * 1000
+        let compressionProperties: NSDictionary = [AVVideoMaxKeyFrameIntervalKey : 5,
+                                                   AVVideoAverageBitRateKey: 150 * 1000
                                                    
         ]
         
@@ -208,14 +207,17 @@ class VideoWriter {
         case mediumQuality:
             print("mediumQuality")
             switch bandwidth {
-            case 0..<200:
-                writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264, AVVideoWidthKey : 240, AVVideoHeightKey: 320, AVVideoCompressionPropertiesKey: compressionProperties])
+            case 0..<100:
+                setWriterInputVideo(CGSize(width: 240,height: 320), compression: 50)
+                break
+            case 100..<200:
+                setWriterInputVideo(CGSize(width: 240,height: 320), compression: bandwidth)
                 break
             case 200..<100000000:
-                writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264, AVVideoWidthKey : 480, AVVideoHeightKey: 640, AVVideoCompressionPropertiesKey: compressionProperties])
+                setWriterInputVideo(CGSize(width: 480,height: 640), compression: bandwidth)
                 break
             default:
-                writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264, AVVideoWidthKey : 240, AVVideoHeightKey: 320, AVVideoCompressionPropertiesKey: compressionProperties])
+                setWriterInputVideo(CGSize(width: 240,height: 320), compression: 50)
                 break
             }
         case lowQuality:
@@ -236,6 +238,15 @@ class VideoWriter {
         
     }
     
+    func setWriterInputVideo(size:CGSize, compression:Double){
+        
+        let compress = compression > 50 ? (compression-50) * 1024 : compression * 1024
+        let compressionProperties: NSDictionary = [AVVideoAverageBitRateKey: compress]
+        
+        writerInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: [AVVideoCodecKey : AVVideoCodecH264, AVVideoWidthKey : size.width, AVVideoHeightKey: size.height, AVVideoCompressionPropertiesKey: compressionProperties])
+        
+    }
+
     func defineQuality(session: AVCaptureSession) -> CGSize {
         let preset = session.sessionPreset
         var size: CGSize?

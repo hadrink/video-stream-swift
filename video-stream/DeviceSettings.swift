@@ -36,11 +36,13 @@ class DeviceSettings {
                 print("Device KO");
             }
             //-- Lock focus
-            videoDevice.focusMode = .Locked
+            videoDevice.focusMode = .AutoFocus
             
             //-- 1/20 of a second i.e 0.05seconds interval between frame
             //videoDevice.activeVideoMaxFrameDuration = CMTimeMake(10, 1)
-            videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 10)
+            //videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 10)
+            //videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, 2)
+            //videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 2)
             //--
             videoDevice.unlockForConfiguration()
         
